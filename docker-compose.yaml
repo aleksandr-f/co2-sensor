@@ -1,0 +1,25 @@
+services:
+  main:
+    container_name: co2-sensor
+    ports:
+      - 8000:8000
+    build:
+      context: .
+      dockerfile: ./docker/DockerFile
+    volumes:
+      - .:/application
+    stdin_open: true
+    depends_on:
+      - mysql
+  mysql:
+    container_name: co2-sensor-mysql
+    image: mysql:8.0.20
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - mysql-volume:/var/lib/mysql
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/startup.sql
+volumes:
+  mysql-volume:
