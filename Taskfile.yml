@@ -1,0 +1,15 @@
+version: '3'
+
+tasks:
+  check-code:
+    cmds:
+      - vendor/bin/phpcbf -p
+      - vendor/bin/phpcs -p
+      - vendor/bin/php-cs-fixer fix -vv
+      - vendor/bin/deptrac analyse
+      - vendor/bin/psalm
+      - vendor/bin/phpunit
+
+  login:
+    cmds:
+      - docker exec -it co2-sensor-php sh

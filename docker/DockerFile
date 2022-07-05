@@ -11,6 +11,10 @@ RUN apk add --no-cache bash \
     && curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash \
     && apk add symfony-cli
 
+RUN wget -q "https://github.com/go-task/task/releases/download/v3.13.0/task_linux_amd64.tar.gz" || exit 1 \
+    && tar -xf task_linux_amd64.tar.gz task \
+    && mv task /usr/bin/task
+
 WORKDIR /app
 
 COPY . /app
