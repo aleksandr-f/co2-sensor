@@ -30,3 +30,5 @@ project.code-workspace
 /.phpcs-cache
 /phpcs.xml
 ###< squizlabs/php_codesniffer ###
+
+.idea
