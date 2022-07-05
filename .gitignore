@@ -32,3 +32,7 @@ project.code-workspace
 ###< squizlabs/php_codesniffer ###
 
 .idea
+
+###> qossmic/deptrac-shim ###
+/.deptrac.cache
+###< qossmic/deptrac-shim ###

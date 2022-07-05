@@ -1,0 +1,31 @@
+parameters:
+    paths:
+        - ./src
+    exclude_files:
+        - '#.*test.*#'
+    layers:
+        -
+            name: Port
+            collectors:
+                -
+                    type: directory
+                    regex: src/Port/.*
+        -
+            name: Application
+            collectors:
+                -
+                    type: directory
+                    regex: src/Application/.*
+        -
+            name: Domain
+            collectors:
+                -
+                    type: directory
+                    regex: src/Domain/.*
+    ruleset:
+        Port:
+            - Application
+            - Domain
+        Application:
+            - Domain
+        Domain: ~
