@@ -11,9 +11,9 @@ RUN apk add --no-cache bash \
     && curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.alpine.sh' | bash \
     && apk add symfony-cli
 
-WORKDIR /application
+WORKDIR /app
 
-COPY . /application
+COPY . /app
 
 RUN wget -q https://getcomposer.org/installer && php installer --install-dir=/usr/bin --filename=composer \
     && rm -f installer \
