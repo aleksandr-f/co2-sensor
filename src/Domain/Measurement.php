@@ -12,6 +12,7 @@ class Measurement implements DomainEventsProducerInterface
     use DomainEventsProducerTrait;
 
     public function __construct(
+        private readonly string $id,
         private readonly string $sensorId,
         private readonly int $co2,
         private readonly \DateTimeInterface $time,
@@ -21,10 +22,5 @@ class Measurement implements DomainEventsProducerInterface
             co2: $this->co2,
             time: $this->time,
         ));
-    }
-
-    public function getCo2(): int
-    {
-        return $this->co2;
     }
 }

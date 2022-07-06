@@ -13,6 +13,7 @@ class Alert
 
     /** @param int[] $measurements */
     public function __construct(
+        private readonly string $id,
         private readonly string $sensorId,
         private readonly array $measurements,
         private readonly \DateTimeInterface $startTime = new \DateTime(),
