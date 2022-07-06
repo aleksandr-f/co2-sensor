@@ -19,7 +19,7 @@ class Measurement implements DomainEventsProducerInterface
         $this->addDomainEvent(event: new MeasurementCreatedEvent(
             sensorId: $this->sensorId,
             co2: $this->co2,
-            time: $this->time
+            time: $this->time,
         ));
     }
 

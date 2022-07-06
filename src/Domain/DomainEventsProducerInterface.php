@@ -6,5 +6,6 @@ namespace App\Domain;
 
 interface DomainEventsProducerInterface
 {
+    /** @return DomainEventInterface[] */
     public function getDomainEvents(): array;
 }

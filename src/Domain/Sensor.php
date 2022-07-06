@@ -18,9 +18,7 @@ class Sensor implements DomainEventsProducerInterface
     ) {
     }
 
-    /**
-     * @param $measurements Measurement[]
-     */
+    /** @param int[] $measurements */
     public function updateStatus(array $measurements): void
     {
         $oldStatus = $this->status;
@@ -28,7 +26,7 @@ class Sensor implements DomainEventsProducerInterface
         $measurementsMoreOrEqual2000 = 0;
 
         foreach ($measurements as $measurement) {
-            if ($measurement->getCo2() >= 2000) {
+            if ($measurement >= 2000) {
                 ++$measurementsMoreOrEqual2000;
             }
         }
@@ -51,14 +49,12 @@ class Sensor implements DomainEventsProducerInterface
             $this->addDomainEvent(
                 event: new AlertResolvedEvent(
                     sensorId: $this->id,
-                )
+                ),
             );
         }
     }
 
-    /**
-     * @param $measurements Measurement[]
-     */
+    /** @param int[] $measurements */
     private function alert(array $measurements): void
     {
         if (SensorStatusEnum::ALERT === $this->status) {

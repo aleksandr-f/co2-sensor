@@ -9,22 +9,14 @@ namespace App\Domain;
  */
 class Alert
 {
-    /** @var int[] */
-    private array $measurements;
-
     private ?\DateTimeInterface $endTime = null;
 
-    /**
-     * @param $measurements Measurement[]
-     */
+    /** @param int[] $measurements */
     public function __construct(
         private readonly string $sensorId,
-        array $measurements,
+        private readonly array $measurements,
         private readonly \DateTimeInterface $startTime = new \DateTime(),
     ) {
-        foreach ($measurements as $measurement) {
-            $this->measurements[] = $measurement->getCo2();
-        }
     }
 
     public function resolve(): void

@@ -6,9 +6,7 @@ namespace App\Domain;
 
 final class AlertStartedEvent implements DomainEventInterface
 {
-    /**
-     * @param Measurement[]
-     */
+    /** @param int[] $measurements */
     public function __construct(
         public readonly string $sensorId,
         public readonly array $measurements,

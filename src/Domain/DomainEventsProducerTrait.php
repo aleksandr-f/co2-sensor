@@ -8,6 +8,7 @@ trait DomainEventsProducerTrait
 {
     private array $domainEvents = [];
 
+    /** @return DomainEventInterface[] */
     public function getDomainEvents(): array
     {
         $domainEvents = $this->domainEvents;
