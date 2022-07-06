@@ -5,7 +5,7 @@ tasks:
     cmds:
       - vendor/bin/phpcbf -p
       - vendor/bin/phpcs -p
-      - vendor/bin/php-cs-fixer fix -vv
+      - vendor/bin/php-cs-fixer fix -vv --allow-risky=yes
       - vendor/bin/deptrac analyse
       - vendor/bin/psalm
       - vendor/bin/phpunit
