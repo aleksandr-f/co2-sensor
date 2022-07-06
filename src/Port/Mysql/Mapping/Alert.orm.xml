@@ -1,0 +1,16 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Domain\Alert" table="alerts">
+        <id name="id" type="string" length="36"/>
+        <field name="sensorId" type="string" length="36" />
+        <field name="startTime" type="datetime" />
+        <field name="endTime" nullable="true" type="datetime"/>
+        <field name="measurements" type="simple_array"/>
+        <indexes>
+            <index name="sensor_id_idx" columns="sensor_id" />
+            <index name="end_time_idx" columns="end_time" />
+        </indexes>
+    </entity>
+</doctrine-mapping>
