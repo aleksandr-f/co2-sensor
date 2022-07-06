@@ -10,6 +10,20 @@ tasks:
       - vendor/bin/psalm
       - vendor/bin/phpunit
 
+  clear-cache-psalm:
+    cmds:
+      - vendor/bin/psalm --clear-cache
+      - vendor/bin/psalm --clear-global-cache
+
   login:
     cmds:
       - docker exec -it co2-sensor-php sh
+
+  database-diff:
+    cmds:
+      - php bin/console doctrine:migrations:diff
+
+  database-migrate:
+    cmds:
+      - php bin/console doctrine:migrations:migrate --no-interaction
+      - php bin/console doctrine:migrations:migrate --no-interaction --env=test
