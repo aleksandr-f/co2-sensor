@@ -27,6 +27,9 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <directory>src/Port/Mysql/Migrations</directory>
+        </exclude>
     </coverage>
 
     <listeners>
