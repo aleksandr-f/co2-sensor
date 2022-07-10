@@ -2,7 +2,6 @@
 
 namespace App\Tests\Integration\Port\Mysql\Repository;
 
-use App\Application\MeasurementRepositoryInterface;
 use App\Port\Mysql\Repository\MeasurementRepository;
 use App\Tests\BaseKernelWithDBTestCase;
 
@@ -14,7 +13,7 @@ final class MeasurementRepositoryTest extends BaseKernelWithDBTestCase
     {
         parent::setUp();
 
-        $this->measurementRepository = self::getContainer()->get(id: MeasurementRepositoryInterface::class);
+        $this->measurementRepository = self::getContainer()->get(id: MeasurementRepository::class);
     }
 
     protected function tearDown(): void
@@ -81,5 +80,30 @@ final class MeasurementRepositoryTest extends BaseKernelWithDBTestCase
         );
 
         self::assertEmpty(actual: $measurements);
+    }
+
+    private function getAllMeasurements(string $sensorId): array
+    {
+        $connection = self::getContainer()->get(id: Connection::class);
+
+        $queryBuilder = $connection->createQueryBuilder();
+
+        $queryBuilder
+            ->select(select: '*')
+            ->from(from: 'measurements', alias: 'm')
+            ->where(predicates: 'a.sensor_id = :sensorId')
+        ;
+
+        $queryBuilder->setParameters(
+            [
+                'sensorId' => $sensorId,
+            ],
+        );
+
+        $statement = $queryBuilder->executeQuery();
+
+        $result = $statement->fetchAllAssociative();
+
+        return $result ?: [];
     }
 }

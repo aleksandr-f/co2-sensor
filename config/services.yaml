@@ -13,3 +13,7 @@ services:
 
     App\Application\MeasurementRepositoryInterface:
         alias: App\Port\Mysql\Repository\MeasurementRepository
+
+    App\Application\AlertRepositoryInterface:
+        alias: App\Port\Mysql\Repository\AlertRepository
+
