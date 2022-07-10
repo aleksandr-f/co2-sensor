@@ -25,7 +25,7 @@ final class Version20220706231231 extends AbstractMigration
                     sensor_id VARCHAR(36) NOT NULL,
                     start_time DATETIME NOT NULL,
                     end_time DATETIME DEFAULT NULL,
-                    measurements LONGTEXT NOT NULL COMMENT \'(DC2Type:simple_array)\',
+                    measurements json NOT NULL,
                     INDEX sensor_id_idx (sensor_id),
                     INDEX end_time_idx (end_time)
             ) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB',
