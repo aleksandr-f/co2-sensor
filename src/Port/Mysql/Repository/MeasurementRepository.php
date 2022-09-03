@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Port\Mysql\Repository;
 
 use App\Application\MeasurementRepositoryInterface;
@@ -28,10 +30,10 @@ final class MeasurementRepository implements MeasurementRepositoryInterface
                 VALUES (:sensorId, :co2, :time)
             ',
             params: [
-                     'sensorId' => $sensorId,
-                     'co2' => $co2,
-                     'time' => $time->format(format: DateTimeInterface::ATOM),
-                 ],
+                'sensorId' => $sensorId,
+                'co2' => $co2,
+                'time' => $time->format(format: DateTimeInterface::ATOM),
+            ],
         );
     }
 

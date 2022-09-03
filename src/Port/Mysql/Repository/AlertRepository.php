@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Port\Mysql\Repository;
 
 use App\Application\AlertRepositoryInterface;
@@ -31,13 +33,13 @@ final class AlertRepository implements AlertRepositoryInterface
                 VALUES (:sensorId, :measurements, :startTime)
             ',
             params: [
-                     'sensorId' => $sensorId,
-                     'measurements' => $measurements,
-                     'startTime' => $startTime->format(format: DateTimeInterface::ATOM),
-                 ],
+                'sensorId' => $sensorId,
+                'measurements' => $measurements,
+                'startTime' => $startTime->format(format: DateTimeInterface::ATOM),
+            ],
             types: [
-                     'measurements' => Types::JSON,
-                 ],
+                'measurements' => Types::JSON,
+            ],
         );
     }
 
@@ -58,8 +60,8 @@ final class AlertRepository implements AlertRepositoryInterface
 
         $queryBuilder->setParameters(
             params: [
-                        'endTime' => $endTime->format(format: DateTimeInterface::ATOM),
-                        'sensorId' => $sensorId,
+                'endTime' => $endTime->format(format: DateTimeInterface::ATOM),
+                'sensorId' => $sensorId,
             ],
         );
 

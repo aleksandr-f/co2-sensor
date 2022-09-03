@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Integration\Port\Mysql\Repository;
 
 use App\Port\Mysql\Repository\AlertRepository;
