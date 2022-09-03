@@ -35,7 +35,7 @@ final class MeasurementRepositoryTest extends BaseKernelWithDBTestCase
 
         $measurements = $this->measurementRepository->getLastMeasurements(
             sensorId: '3d08e9f0-9c00-4765-9645-b2a7201975e0',
-            count: 3,
+            count: 1,
         );
 
         self::assertCount(expectedCount: 1, haystack: $measurements);
@@ -69,12 +69,7 @@ final class MeasurementRepositoryTest extends BaseKernelWithDBTestCase
             count: 3,
         );
 
-        self::assertCount(expectedCount: 1, haystack: $measurements);
-
-        self::assertSame(
-            expected: '3d08e9f0-9c00-4765-9645-b2a7201975e0',
-            actual: $measurements[0]['sensor_id'],
-        );
+        self::assertEmpty(actual: $measurements);
 
         $measurements = $this->measurementRepository->getLastMeasurements(
             sensorId: '8dc7646f-1ccc-4966-8af4-ade6dc81ef8a',
@@ -82,30 +77,29 @@ final class MeasurementRepositoryTest extends BaseKernelWithDBTestCase
         );
 
         self::assertEmpty(actual: $measurements);
-    }
 
-    private function getAllMeasurements(string $sensorId): array
-    {
-        $connection = self::getContainer()->get(id: Connection::class);
-
-        $queryBuilder = $connection->createQueryBuilder();
-
-        $queryBuilder
-            ->select(select: '*')
-            ->from(from: 'measurements', alias: 'm')
-            ->where(predicates: 'a.sensor_id = :sensorId')
-        ;
-
-        $queryBuilder->setParameters(
-            [
-                'sensorId' => $sensorId,
-            ],
+        $this->measurementRepository->create(
+            sensorId: '3d08e9f0-9c00-4765-9645-b2a7201975e0',
+            co2: 1800,
+            time: new \DateTime(datetime: '2021-01-03T02:30:00+01:00'),
         );
 
-        $statement = $queryBuilder->executeQuery();
+        $this->measurementRepository->create(
+            sensorId: '3d08e9f0-9c00-4765-9645-b2a7201975e0',
+            co2: 1800,
+            time: new \DateTime(datetime: '2021-01-03T02:30:00+01:00'),
+        );
 
-        $result = $statement->fetchAllAssociative();
+        $measurements = $this->measurementRepository->getLastMeasurements(
+            sensorId: '3d08e9f0-9c00-4765-9645-b2a7201975e0',
+            count: 3,
+        );
 
-        return $result ?: [];
+        self::assertCount(expectedCount: 3, haystack: $measurements);
+
+        self::assertSame(
+            expected: '3d08e9f0-9c00-4765-9645-b2a7201975e0',
+            actual: $measurements[0]['sensor_id'],
+        );
     }
 }

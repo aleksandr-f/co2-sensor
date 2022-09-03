@@ -64,6 +64,10 @@ final class MeasurementRepository implements MeasurementRepositoryInterface
 
         $result = $statement->fetchAllAssociative();
 
-        return $result ?: [];
+        if ($count !== count($result)) {
+            return [];
+        }
+
+        return $result;
     }
 }
