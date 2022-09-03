@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application;
 
-interface MeasurementRepositoryInterface
+interface MeasurementReadRepositoryInterface
 {
     public function create(
         string $sensorId,

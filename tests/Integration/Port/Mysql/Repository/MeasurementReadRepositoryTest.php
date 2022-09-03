@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Port\Mysql\Repository;
 
-use App\Port\Mysql\Repository\MeasurementRepository;
+use App\Port\Mysql\Repository\MeasurementReadRepository;
 use Tests\BaseKernelWithDBTestCase;
 
-final class MeasurementRepositoryTest extends BaseKernelWithDBTestCase
+final class MeasurementReadRepositoryTest extends BaseKernelWithDBTestCase
 {
-    private MeasurementRepository $measurementRepository;
+    private MeasurementReadRepository $measurementRepository;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->measurementRepository = self::getContainer()->get(id: MeasurementRepository::class);
+        $this->measurementRepository = self::getContainer()->get(id: MeasurementReadRepository::class);
     }
 
     protected function tearDown(): void

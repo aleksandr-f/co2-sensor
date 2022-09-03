@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Port\Mysql\Repository;
 
-use App\Application\MeasurementRepositoryInterface;
+use App\Application\MeasurementReadRepositoryInterface;
 use DateTimeInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 
-final class MeasurementRepository implements MeasurementRepositoryInterface
+final class MeasurementReadRepository implements MeasurementReadRepositoryInterface
 {
     public function __construct(
         private readonly Connection $connection,
