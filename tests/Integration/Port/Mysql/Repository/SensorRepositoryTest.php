@@ -27,7 +27,7 @@ final class SensorRepositoryTest extends BaseKernelWithDBTestCase
 
     protected function tearDown(): void
     {
-        unset($this->sensorRepository);
+        unset($this->sensorRepository, $this->sensorFactory);
 
         parent::tearDown();
     }
