@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain;
+namespace App\Application;
 
-final class MeasurementCreatedEvent implements DomainEventInterface
+final class MeasurementCreatedEvent
 {
     public function __construct(
         public readonly string $sensorId,
