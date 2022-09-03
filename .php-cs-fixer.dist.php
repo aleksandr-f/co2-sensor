@@ -11,7 +11,10 @@ return (new PhpCsFixer\Config())
                    '@Symfony' => true,
                    'concat_space' => ['spacing' => 'one'],
                    'final_class' => true,
-                   'trailing_comma_in_multiline' => ['elements' => ['arrays', 'arguments', 'parameters']]
+                   'trailing_comma_in_multiline' => ['elements' => ['arrays', 'arguments', 'parameters']],
+                   'array_indentation' => true,
+                   'multiline_whitespace_before_semicolons' => ['strategy' => 'new_line_for_chained_calls'],
+                   'declare_strict_types' => true,
                ])
     ->setFinder($finder)
 ;
