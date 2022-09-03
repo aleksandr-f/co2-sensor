@@ -4,6 +4,6 @@
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="App\Domain\Sensor" table="sensors">
         <id name="id" type="string" length="36"/>
-        <field name="status" type="string" length="10"/>
+        <field name="status" type="string" length="10" enum-type="App\Domain\SensorStatusEnum"/>
     </entity>
 </doctrine-mapping>
