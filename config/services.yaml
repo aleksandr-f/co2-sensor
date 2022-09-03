@@ -6,10 +6,10 @@ services:
         autoconfigure: true
 
     App\:
-        resource: '../src/'
+        resource: '%kernel.project_dir%/src/'
         exclude:
-            - '../src/Domain/'
-            - '../src/Kernel.php'
+            - '%kernel.project_dir%/src/Domain/'
+            - '%kernel.project_dir%/src/Kernel.php'
 
     App\Application\MeasurementRepositoryInterface:
         alias: App\Port\Mysql\Repository\MeasurementRepository

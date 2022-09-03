@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests\Integration\Port\Mysql\Repository;
+namespace Tests\Integration\Port\Mysql\Repository;
 
 use App\Port\Mysql\Repository\AlertRepository;
-use App\Tests\BaseKernelWithDBTestCase;
 use Doctrine\DBAL\Connection;
+use Tests\BaseKernelWithDBTestCase;
 
 final class AlertRepositoryTest extends BaseKernelWithDBTestCase
 {

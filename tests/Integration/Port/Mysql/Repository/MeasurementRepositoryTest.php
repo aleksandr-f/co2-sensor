@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Tests\Integration\Port\Mysql\Repository;
+namespace Tests\Integration\Port\Mysql\Repository;
 
 use App\Port\Mysql\Repository\MeasurementRepository;
-use App\Tests\BaseKernelWithDBTestCase;
+use Tests\BaseKernelWithDBTestCase;
 
 final class MeasurementRepositoryTest extends BaseKernelWithDBTestCase
 {

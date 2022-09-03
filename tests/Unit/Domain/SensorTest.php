@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Unit\Domain;
+namespace Tests\Unit\Domain;
 
 use App\Domain\AlertResolvedEvent;
 use App\Domain\AlertStartedEvent;
