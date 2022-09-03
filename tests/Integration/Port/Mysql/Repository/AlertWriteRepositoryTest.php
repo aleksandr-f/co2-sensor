@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Port\Mysql\Repository;
 
-use App\Port\Mysql\Repository\AlertRepository;
+use App\Port\Mysql\Repository\AlertWriteRepository;
 use Doctrine\DBAL\Connection;
 use Tests\BaseKernelWithDBTestCase;
 
-final class AlertRepositoryTest extends BaseKernelWithDBTestCase
+final class AlertWriteRepositoryTest extends BaseKernelWithDBTestCase
 {
-    private AlertRepository $alertRepository;
+    private AlertWriteRepository $alertRepository;
 
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->alertRepository = self::getContainer()->get(id: AlertRepository::class);
+        $this->alertRepository = self::getContainer()->get(id: AlertWriteRepository::class);
     }
 
     protected function tearDown(): void

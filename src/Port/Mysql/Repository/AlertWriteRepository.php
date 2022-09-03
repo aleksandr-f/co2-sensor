@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Port\Mysql\Repository;
 
-use App\Application\AlertRepositoryInterface;
+use App\Application\AlertWriteRepositoryInterface;
 use DateTimeInterface;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 use Doctrine\DBAL\Types\Types;
 
-final class AlertRepository implements AlertRepositoryInterface
+final class AlertWriteRepository implements AlertWriteRepositoryInterface
 {
     public function __construct(
         private readonly Connection $connection,
