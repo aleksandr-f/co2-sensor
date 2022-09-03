@@ -6,11 +6,9 @@ namespace App\Application;
 
 use App\Domain\Sensor;
 
-interface SensorRepositoryInterface
+interface SensorReadRepositoryInterface
 {
     public function exists(string $id): bool;
 
     public function get(string $id): Sensor;
-
-    public function save(Sensor $sensor): void;
 }

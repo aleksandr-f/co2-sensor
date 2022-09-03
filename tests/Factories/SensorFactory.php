@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Factories;
 
 use App\Application\CreateSensorCommand;
-use App\Application\SensorRepositoryInterface;
+use App\Application\SensorReadRepositoryInterface;
 use App\Domain\Sensor;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -13,7 +13,7 @@ final class SensorFactory
 {
     public function __construct(
         private readonly MessageBusInterface $messageBus,
-        private readonly SensorRepositoryInterface $sensorRepository,
+        private readonly SensorReadRepositoryInterface $sensorRepository,
     ) {
     }
 

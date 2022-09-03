@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Tests\Integration\Port\Mysql\Repository;
 
 use App\Application\SensorNotFoundException;
-use App\Domain\Sensor;
-use App\Port\Mysql\Repository\SensorRepository;
+use App\Port\Mysql\Repository\SensorReadRepository;
 use Tests\BaseKernelWithDBTestCase;
 use Tests\Factories\SensorFactory;
 
-final class SensorRepositoryTest extends BaseKernelWithDBTestCase
+final class SensorReadRepositoryTest extends BaseKernelWithDBTestCase
 {
-    private SensorRepository $sensorRepository;
+    private SensorReadRepository $sensorRepository;
 
     private SensorFactory $sensorFactory;
 
@@ -20,7 +19,7 @@ final class SensorRepositoryTest extends BaseKernelWithDBTestCase
     {
         parent::setUp();
 
-        $this->sensorRepository = self::getContainer()->get(id: SensorRepository::class);
+        $this->sensorRepository = self::getContainer()->get(id: SensorReadRepository::class);
 
         $this->sensorFactory = self::getContainer()->get(id: SensorFactory::class);
     }
@@ -60,16 +59,6 @@ final class SensorRepositoryTest extends BaseKernelWithDBTestCase
         $this->sensorFactory->createOne(data: [
             'id' => '0c9cd912-dcb9-49bf-a260-662a6e090d93',
         ]);
-
-        $this->sensorRepository->get(id: '0c9cd912-dcb9-49bf-a260-662a6e090d93');
-    }
-
-    /** @doesNotPerformAssertions */
-    public function testSave(): void
-    {
-        $sensor = new Sensor(id: '0c9cd912-dcb9-49bf-a260-662a6e090d93');
-
-        $this->sensorRepository->save(sensor: $sensor);
 
         $this->sensorRepository->get(id: '0c9cd912-dcb9-49bf-a260-662a6e090d93');
     }

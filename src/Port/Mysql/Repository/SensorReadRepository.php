@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Port\Mysql\Repository;
 
 use App\Application\SensorNotFoundException;
-use App\Application\SensorRepositoryInterface;
+use App\Application\SensorReadRepositoryInterface;
 use App\Domain\Sensor;
 use App\Port\EntityRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
-final class SensorRepository extends EntityRepository implements SensorRepositoryInterface
+final class SensorReadRepository extends EntityRepository implements SensorReadRepositoryInterface
 {
     public function __construct(
         ManagerRegistry $registry,
@@ -47,15 +47,6 @@ final class SensorRepository extends EntityRepository implements SensorRepositor
         );
 
         return (bool) $queryBuilder->executeQuery()->fetchNumeric();
-    }
-
-    public function save(Sensor $sensor): void
-    {
-        $this->getEntityManager()->persist(entity: $sensor);
-
-        $this->getEntityManager()->flush();
-
-        $this->publishEvents();
     }
 
     public function get(string $id): Sensor
