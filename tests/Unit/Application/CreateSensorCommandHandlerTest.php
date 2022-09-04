@@ -6,18 +6,18 @@ namespace Tests\Unit\Application;
 
 use App\Application\CreateSensorCommand;
 use App\Application\CreateSensorCommandHandler;
-use App\Application\SensorRepositoryInterface;
+use App\Application\SensorWriteRepositoryInterface;
 use PHPUnit\Framework\TestCase;
 
 final class CreateSensorCommandHandlerTest extends TestCase
 {
     public function testHandler(): void
     {
-        $repository = $this->createMock(originalClassName: SensorRepositoryInterface::class);
+        $repository = $this->createMock(originalClassName: SensorWriteRepositoryInterface::class);
         $repository
             ->expects(self::once())
             ->method(constraint: 'save')
-            ;
+        ;
 
         $handler = new CreateSensorCommandHandler(
             sensorRepository: $repository,
