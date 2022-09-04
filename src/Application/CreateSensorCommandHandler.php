@@ -11,7 +11,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 final class CreateSensorCommandHandler
 {
     public function __construct(
-        private readonly SensorRepositoryInterface $sensorRepository,
+        private readonly SensorWriteRepositoryInterface $sensorRepository,
     ) {
     }
 
