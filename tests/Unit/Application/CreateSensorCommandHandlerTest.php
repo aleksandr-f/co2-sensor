@@ -23,6 +23,6 @@ final class CreateSensorCommandHandlerTest extends TestCase
             sensorRepository: $repository,
         );
 
-        $handler->__invoke(command: new CreateSensorCommand('5218eb04-9da6-4dd5-a780-cd50f9378ff6'));
+        $handler->__invoke(command: new CreateSensorCommand(sensorId: '5218eb04-9da6-4dd5-a780-cd50f9378ff6'));
     }
 }
