@@ -6,12 +6,6 @@ namespace App\Application;
 
 interface MeasurementReadRepositoryInterface
 {
-    public function create(
-        string $sensorId,
-        int $co2,
-        \DateTimeInterface $time,
-    ): void;
-
     /** @return int[] */
     public function getLastMeasurements(
         string $sensorId,
