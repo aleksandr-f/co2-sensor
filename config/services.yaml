@@ -11,9 +11,6 @@ services:
             - '%kernel.project_dir%/src/Domain/'
             - '%kernel.project_dir%/src/Kernel.php'
 
-    App\Application\MeasurementRepositoryInterface:
-        alias: App\Port\Mysql\Repository\MeasurementRepository
-
-    App\Application\AlertRepositoryInterface:
-        alias: App\Port\Mysql\Repository\AlertRepository
+    App\Application\AlertReadRepositoryInterface:
+        alias: App\Port\Mysql\Repository\AlertReadRepository
 
