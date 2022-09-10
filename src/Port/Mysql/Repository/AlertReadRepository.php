@@ -25,10 +25,10 @@ final class AlertReadRepository implements AlertReadRepositoryInterface
 
         $queryBuilder
             ->select(
-                select: 'sensor_id, start_time, end_time, measurements',
+                select: 'a.sensor_id, a.start_time, a.end_time, a.measurements',
             )
-            ->from(from: 'alerts', alias: 'm')
-            ->where('m.sensor_id = :sensorId')
+            ->from(from: 'alerts', alias: 'a')
+            ->where('a.sensor_id = :sensorId')
         ;
 
         $queryBuilder->setParameters(
