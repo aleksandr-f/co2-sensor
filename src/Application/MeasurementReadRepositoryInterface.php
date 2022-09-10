@@ -6,7 +6,6 @@ namespace App\Application;
 
 interface MeasurementReadRepositoryInterface
 {
-    /** @return int[] */
     public function getLastMeasurements(
         string $sensorId,
         int $count,

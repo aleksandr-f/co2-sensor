@@ -47,7 +47,7 @@ final class MeasurementReadRepository implements MeasurementReadRepositoryInterf
         $queryBuilder = $this->connection->createQueryBuilder();
 
         $queryBuilder
-            ->select(select: '*')
+            ->select(select: 'm.sensor_id, m.co2, m.time')
             ->from(from: 'measurements', alias: 'm')
             ->where('m.sensor_id = :sensorId')
             ->orderBy(sort: 'm.time', order: 'DESC')
