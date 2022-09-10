@@ -6,3 +6,13 @@ services:
 
     Tests\Factories\:
         resource: '%kernel.project_dir%/tests/Factories/*'
+
+    Tests\Mocks\:
+        resource: '%kernel.project_dir%/tests/Mocks/*'
+
+    Tests\Mocks\EventDispatcher:
+        arguments:
+            $eventDispatcher: '@event_dispatcher'
+
+    Psr\EventDispatcher\EventDispatcherInterface:
+        alias: 'Tests\Mocks\EventDispatcher'
