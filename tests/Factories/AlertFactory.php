@@ -29,6 +29,7 @@ final class AlertFactory
         $alerts = $this->alertReadRepository->findByListAlertsQuery(
             query: new ListAlertsQuery(
                 sensorId: $sensorId,
+                limit: 1,
             ),
         );
 
