@@ -37,10 +37,12 @@ final class AlertReadRepository implements AlertReadRepositoryInterface
             ],
         );
 
+        #TODO add test
         if ($query->limit) {
             $queryBuilder->setMaxResults(maxResults: $query->limit);
         }
 
+        #TODO add test
         if ($query->offset) {
             $queryBuilder->setFirstResult(firstResult: $query->offset);
         }
