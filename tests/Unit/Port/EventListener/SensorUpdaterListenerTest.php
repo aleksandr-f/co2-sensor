@@ -17,7 +17,7 @@ final class SensorUpdaterListenerTest extends TestCase
 {
     public function testOnMeasurementCreatedEventSensorExists(): void
     {
-        $commandBus = new class() implements MessageBusInterface {
+        $commandBus = new class () implements MessageBusInterface {
             public array $commands;
 
             public function dispatch(
@@ -71,7 +71,7 @@ final class SensorUpdaterListenerTest extends TestCase
 
     public function testOnMeasurementCreatedEventSensorDoesNotExist(): void
     {
-        $commandBus = new class() implements MessageBusInterface {
+        $commandBus = new class () implements MessageBusInterface {
             public array $commands;
 
             public function dispatch(

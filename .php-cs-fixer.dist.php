@@ -15,6 +15,7 @@ return (new PhpCsFixer\Config())
                    'array_indentation' => true,
                    'multiline_whitespace_before_semicolons' => ['strategy' => 'new_line_for_chained_calls'],
                    'declare_strict_types' => true,
+                   'class_definition' => ['space_before_parenthesis' => true],
                ])
     ->setFinder($finder)
 ;
