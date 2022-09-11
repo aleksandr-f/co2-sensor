@@ -16,3 +16,10 @@ services:
 
     Psr\EventDispatcher\EventDispatcherInterface:
         alias: 'Tests\Mocks\EventDispatcher'
+
+    Tests\Mocks\MessageBus:
+        arguments:
+            $messageBus: '@messenger.bus.default'
+
+    Symfony\Component\Messenger\MessageBusInterface:
+        alias: 'Tests\Mocks\MessageBus'
