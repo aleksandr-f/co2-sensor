@@ -44,4 +44,62 @@ final class AlertReadRepositoryTest extends BaseKernelWithDBTestCase
 
         self::assertEmpty(actual: $alerts);
     }
+
+    public function testFindByListAlertsQueryLimit(): void
+    {
+        /** @var AlertFactory $alertFactory */
+        $alertFactory = self::getContainer()->get(id: AlertFactory::class);
+
+        $alertFactory->createMany(3);
+
+        /** @var AlertReadRepository $alertReadRepository */
+        $alertReadRepository = self::getContainer()->get(id: AlertReadRepository::class);
+
+        $alerts = $alertReadRepository->findByListAlertsQuery(
+            query: new ListAlertsQuery(),
+        );
+
+        self::assertCount(
+            expectedCount: 3,
+            haystack: $alerts,
+        );
+
+        $alerts = $alertReadRepository->findByListAlertsQuery(
+            query: new ListAlertsQuery(limit: 1),
+        );
+
+        self::assertCount(
+            expectedCount: 1,
+            haystack: $alerts,
+        );
+    }
+
+    public function testFindByListAlertsQueryOffset(): void
+    {
+        /** @var AlertFactory $alertFactory */
+        $alertFactory = self::getContainer()->get(id: AlertFactory::class);
+
+        $alertFactory->createMany(3);
+
+        /** @var AlertReadRepository $alertReadRepository */
+        $alertReadRepository = self::getContainer()->get(id: AlertReadRepository::class);
+
+        $alerts = $alertReadRepository->findByListAlertsQuery(
+            query: new ListAlertsQuery(),
+        );
+
+        self::assertCount(
+            expectedCount: 3,
+            haystack: $alerts,
+        );
+
+        $alerts = $alertReadRepository->findByListAlertsQuery(
+            query: new ListAlertsQuery(offset: 1),
+        );
+
+        self::assertCount(
+            expectedCount: 2,
+            haystack: $alerts,
+        );
+    }
 }

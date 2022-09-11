@@ -28,21 +28,17 @@ final class AlertReadRepository implements AlertReadRepositoryInterface
                 select: 'a.sensor_id, a.start_time, a.end_time, a.measurements',
             )
             ->from(from: 'alerts', alias: 'a')
-            ->where('a.sensor_id = :sensorId')
         ;
 
-        $queryBuilder->setParameters(
-            [
-                'sensorId' => $query->sensorId,
-            ],
-        );
+        if ($query->sensorId) {
+            $queryBuilder->andWhere(where: 'a.sensor_id = :sensorId');
+            $queryBuilder->setParameter('sensorId', $query->sensorId);
+        }
 
-        // TODO add test
         if ($query->limit) {
             $queryBuilder->setMaxResults(maxResults: $query->limit);
         }
 
-        // TODO add test
         if ($query->offset) {
             $queryBuilder->setFirstResult(firstResult: $query->offset);
         }

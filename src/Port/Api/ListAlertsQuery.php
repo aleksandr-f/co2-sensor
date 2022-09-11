@@ -7,7 +7,7 @@ namespace App\Port\Api;
 final class ListAlertsQuery
 {
     public function __construct(
-        public readonly string $sensorId,
+        public readonly string $sensorId = '',
         public readonly ?int $limit = null,
         public readonly ?int $offset = null,
     ) {

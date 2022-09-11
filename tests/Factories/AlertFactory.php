@@ -35,4 +35,11 @@ final class AlertFactory
 
         return $alerts[0];
     }
+
+    public function createMany(int $count, array $data = []): void
+    {
+        for ($i = 0; $i < $count; ++$i) {
+            $this->createOne(data: $data);
+        }
+    }
 }
