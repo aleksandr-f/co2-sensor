@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Integration\Application;
 
+use App\Application\AlertReadRepositoryInterface;
+use App\Application\ListAlertsQuery;
 use App\Application\ResolveAlertCommand;
-use App\Port\AlertReadRepositoryInterface;
-use App\Port\Api\ListAlertsQuery;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Tests\BaseKernelWithDBTestCase;
 use Tests\Factories\AlertFactory;
@@ -38,7 +38,7 @@ final class ResolveAlertCommandTest extends BaseKernelWithDBTestCase
 
         $messageBus->dispatch(new ResolveAlertCommand(sensorId: '5218eb04-9da6-4dd5-a780-cd50f9378ff6'));
 
-        /** @var AlertReadRepositoryInterface $alertReadRepository */
+        /** @var \App\Application\AlertReadRepositoryInterface $alertReadRepository */
         $alertReadRepository = self::getContainer()->get(id: AlertReadRepositoryInterface::class);
 
         $alerts = $alertReadRepository->findByListAlertsQuery(

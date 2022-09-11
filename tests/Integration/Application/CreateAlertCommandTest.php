@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Integration\Application;
 
 use App\Application\CreateAlertCommand;
-use App\Port\Api\ListAlertsQuery;
+use App\Application\ListAlertsQuery;
 use App\Port\Mysql\Repository\AlertReadRepository;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Tests\BaseKernelWithDBTestCase;

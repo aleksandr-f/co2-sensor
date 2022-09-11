@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Port\Api;
+namespace App\Application;
 
 final class ListAlertsQuery
 {

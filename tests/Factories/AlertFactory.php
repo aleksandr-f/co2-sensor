@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Factories;
 
+use App\Application\AlertReadRepositoryInterface;
 use App\Application\AlertWriteRepositoryInterface;
-use App\Port\AlertReadRepositoryInterface;
-use App\Port\Api\ListAlertsQuery;
+use App\Application\ListAlertsQuery;
 
 final class AlertFactory
 {

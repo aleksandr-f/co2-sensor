@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Port;
-
-use App\Port\Api\ListAlertsQuery;
+namespace App\Application;
 
 interface AlertReadRepositoryInterface
 {

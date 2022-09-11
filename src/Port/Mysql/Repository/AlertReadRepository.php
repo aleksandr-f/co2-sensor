@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Port\Mysql\Repository;
 
-use App\Port\AlertReadRepositoryInterface;
-use App\Port\Api\ListAlertsQuery;
+use App\Application\AlertReadRepositoryInterface;
+use App\Application\ListAlertsQuery;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Exception;
 
