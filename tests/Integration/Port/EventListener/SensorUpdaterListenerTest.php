@@ -32,7 +32,7 @@ final class SensorUpdaterListenerTest extends BaseKernelWithDBTestCase
         );
 
         $updateSensorCommand = $messageBus->getFirstMessageByType(
-            UpdateSensorCommand::class,
+            type: UpdateSensorCommand::class,
         );
 
         self::assertSame(
