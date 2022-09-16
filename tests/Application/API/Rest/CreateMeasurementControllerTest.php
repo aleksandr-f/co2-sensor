@@ -25,7 +25,7 @@ final class CreateMeasurementControllerTest extends BaseRestApiTestCase
             content: \json_encode(value: $requestBody),
         );
 
-        static::assertEquals(
+        self::assertEquals(
             expected: Response::HTTP_CREATED,
             actual: $this->client->getResponse()->getStatusCode(),
         );
