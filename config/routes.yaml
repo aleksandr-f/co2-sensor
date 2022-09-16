@@ -1,3 +1,4 @@
 controllers:
-    resource: ../src/Controller/
+    resource: ../src/Port/Api/Rest/
     type: attribute
+    prefix: '/api/v1/sensors'
