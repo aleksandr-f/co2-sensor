@@ -6,6 +6,7 @@ namespace Tests\Integration\Port\Mysql\Repository;
 
 use App\Port\Mysql\Repository\MeasurementReadRepository;
 use Tests\BaseKernelWithDBTestCase;
+use Tests\Factories\MeasurementFactory;
 
 final class MeasurementReadRepositoryTest extends BaseKernelWithDBTestCase
 {
@@ -69,6 +70,92 @@ final class MeasurementReadRepositoryTest extends BaseKernelWithDBTestCase
         self::assertSame(
             expected: '3d08e9f0-9c00-4765-9645-b2a7201975e0',
             actual: $measurements[0]['sensor_id'],
+        );
+    }
+
+    public function testGetMax(): void
+    {
+        $this->createTestData();
+
+        self::assertSame(
+            expected: 0,
+            actual: $this->measurementRepository->getMax(
+                sensorId: '3d08e9f0-9c00-4765-9645-b2a7201975e0',
+                days: 10,
+            ),
+        );
+
+        self::assertSame(
+            expected: 2000,
+            actual: $this->measurementRepository->getMax(
+                sensorId: '137e3b0b-2cc1-40b1-aa53-843b9d05775e',
+                days: 10,
+            ),
+        );
+
+        self::assertSame(
+            expected: 1900,
+            actual: $this->measurementRepository->getMax(
+                sensorId: '137e3b0b-2cc1-40b1-aa53-843b9d05775e',
+                days: 1,
+            ),
+        );
+    }
+
+    public function testGetAvg(): void
+    {
+        $this->createTestData();
+
+        self::assertSame(
+            expected: 0.0,
+            actual: $this->measurementRepository->getAvg(
+                sensorId: '3d08e9f0-9c00-4765-9645-b2a7201975e0',
+                days: 10,
+            ),
+        );
+
+        self::assertSame(
+            expected: 1900.0,
+            actual: $this->measurementRepository->getAvg(
+                sensorId: '137e3b0b-2cc1-40b1-aa53-843b9d05775e',
+                days: 10,
+            ),
+        );
+
+        self::assertSame(
+            expected: 1850.0,
+            actual: $this->measurementRepository->getAvg(
+                sensorId: '137e3b0b-2cc1-40b1-aa53-843b9d05775e',
+                days: 1,
+            ),
+        );
+    }
+
+    private function createTestData(): void
+    {
+        /** @var MeasurementFactory $measurementFactory */
+        $measurementFactory = self::getContainer()->get(id: MeasurementFactory::class);
+
+        $measurementFactory->createOne(
+            data: [
+                'sensorId' => '137e3b0b-2cc1-40b1-aa53-843b9d05775e',
+                'co2' => 1800,
+            ],
+        );
+
+        $measurementFactory->createOne(
+            data: [
+                'sensorId' => '137e3b0b-2cc1-40b1-aa53-843b9d05775e',
+                'co2' => 2000,
+                'time' => (new \DateTime(datetime: '-5 days')),
+            ],
+        );
+
+        $measurementFactory->createOne(
+            data: [
+                'sensorId' => '137e3b0b-2cc1-40b1-aa53-843b9d05775e',
+                'co2' => 1900,
+            ],
         );
     }
 }

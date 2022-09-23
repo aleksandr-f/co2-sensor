@@ -49,13 +49,13 @@ final class MeasurementReadRepository implements MeasurementReadRepositoryInterf
         $queryBuilder
             ->select(select: 'm.sensor_id, m.co2, m.time')
             ->from(from: 'measurements', alias: 'm')
-            ->where('m.sensor_id = :sensorId')
+            ->where(predicates: 'm.sensor_id = :sensorId')
             ->orderBy(sort: 'm.time', order: 'DESC')
             ->setMaxResults(maxResults: $count)
         ;
 
         $queryBuilder->setParameters(
-            [
+            params: [
                 'sensorId' => $sensorId,
             ],
         );
@@ -69,5 +69,61 @@ final class MeasurementReadRepository implements MeasurementReadRepositoryInterf
         }
 
         return $result;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getMax(string $sensorId, int $days): int
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+
+        $time = (new \DateTime(datetime: "-$days days"))->format(format: 'Y-m-d H:i:s');
+
+        $queryBuilder
+            ->select(select: 'MAX(m.co2)')
+            ->from(from: 'measurements', alias: 'm')
+            ->where('m.sensor_id = :sensorId', 'm.time >= :time')
+            ->groupBy(groupBy: 'm.sensor_id')
+        ;
+
+        $queryBuilder->setParameters(
+            params: [
+                'sensorId' => $sensorId,
+                'time' => $time,
+            ],
+        );
+
+        $result = $queryBuilder->executeQuery()->fetchNumeric();
+
+        return $result ? $result[0] : 0;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getAvg(string $sensorId, int $days): float
+    {
+        $queryBuilder = $this->connection->createQueryBuilder();
+
+        $time = (new \DateTime(datetime: "-$days days"))->format(format: 'Y-m-d H:i:s');
+
+        $queryBuilder
+            ->select(select: 'AVG(m.co2)')
+            ->from(from: 'measurements', alias: 'm')
+            ->where('m.sensor_id = :sensorId', 'm.time >= :time')
+            ->groupBy(groupBy: 'm.sensor_id')
+        ;
+
+        $queryBuilder->setParameters(
+            params: [
+                'sensorId' => $sensorId,
+                'time' => $time,
+            ],
+        );
+
+        $result = $queryBuilder->executeQuery()->fetchNumeric();
+
+        return $result ? (float) $result[0] : 0;
     }
 }
