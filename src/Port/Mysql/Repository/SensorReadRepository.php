@@ -7,9 +7,11 @@ namespace App\Port\Mysql\Repository;
 use App\Application\SensorNotFoundException;
 use App\Application\SensorReadRepositoryInterface;
 use App\Domain\Sensor;
+use App\Domain\SensorStatusEnum;
 use App\Port\EntityRepository;
 use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
+use JetBrains\PhpStorm\ArrayShape;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
 final class SensorReadRepository extends EntityRepository implements SensorReadRepositoryInterface
@@ -52,6 +54,37 @@ final class SensorReadRepository extends EntityRepository implements SensorReadR
     public function get(string $id): Sensor
     {
         $sensor = $this->find(id: $id);
+
+        if (!$sensor) {
+            throw new SensorNotFoundException(message: 'Sensor was not found for id $id');
+        }
+
+        return $sensor;
+    }
+
+    #[ArrayShape([
+        'id' => 'string',
+        'status' => SensorStatusEnum::class,
+    ])]
+    public function getAsArray(string $id): array
+    {
+        $connection = $this->getEntityManager()->getConnection();
+
+        $queryBuilder = $connection->createQueryBuilder();
+
+        $queryBuilder
+            ->select(select: '*')
+            ->from(from: 'sensors', alias: 's')
+            ->where('s.id = :id')
+        ;
+
+        $queryBuilder->setParameters(
+            [
+                'id' => $id,
+            ],
+        );
+
+        $sensor = $queryBuilder->executeQuery()->fetchAssociative();
 
         if (!$sensor) {
             throw new SensorNotFoundException(message: 'Sensor was not found for id $id');

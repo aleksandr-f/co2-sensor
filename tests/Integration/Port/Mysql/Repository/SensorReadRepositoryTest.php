@@ -50,16 +50,52 @@ final class SensorReadRepositoryTest extends BaseKernelWithDBTestCase
         );
     }
 
-    public function testGet(): void
+    public function testGetNotFound(): void
     {
         $this->expectException(exception: SensorNotFoundException::class);
 
         $this->sensorRepository->get(id: '0c9cd912-dcb9-49bf-a260-662a6e090d93');
+    }
 
+    /** @doesNotPerformAssertions  */
+    public function testGet(): void
+    {
         $this->sensorFactory->createOne(data: [
             'id' => '0c9cd912-dcb9-49bf-a260-662a6e090d93',
         ]);
 
         $this->sensorRepository->get(id: '0c9cd912-dcb9-49bf-a260-662a6e090d93');
+    }
+
+    public function testGetAsArrayNotFound(): void
+    {
+        $this->expectException(exception: SensorNotFoundException::class);
+
+        $this->sensorRepository->getAsArray(
+            id: '0c9cd912-dcb9-49bf-a260-662a6e090d93',
+        );
+
+        $this->sensorFactory->createOne(data: [
+            'id' => '0c9cd912-dcb9-49bf-a260-662a6e090d93',
+        ]);
+
+        self::assertNotEmpty(
+            actual: $this->sensorRepository->getAsArray(
+                id: '0c9cd912-dcb9-49bf-a260-662a6e090d93',
+            ),
+        );
+    }
+
+    public function testGetAsArray(): void
+    {
+        $this->sensorFactory->createOne(data: [
+            'id' => '0c9cd912-dcb9-49bf-a260-662a6e090d93',
+        ]);
+
+        self::assertNotEmpty(
+            actual: $this->sensorRepository->getAsArray(
+                id: '0c9cd912-dcb9-49bf-a260-662a6e090d93',
+            ),
+        );
     }
 }

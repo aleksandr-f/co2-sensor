@@ -11,4 +11,6 @@ interface SensorReadRepositoryInterface
     public function exists(string $id): bool;
 
     public function get(string $id): Sensor;
+
+    public function getAsArray(string $id): array;
 }
