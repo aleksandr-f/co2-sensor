@@ -30,4 +30,26 @@ final class CreateMeasurementControllerTest extends BaseRestApiTestCase
             actual: $this->client->getResponse()->getStatusCode(),
         );
     }
+
+    public function testSuccessfulCreateBadRequestWrongDateFormat(): void
+    {
+        $requestBody = [
+            'co2' => 2000,
+            'time' => '2019--01T18:55:47+00:00',
+        ];
+
+        $this->client->request(
+            method: 'POST',
+            uri: '/api/v1/sensors/137e3b0b-2cc1-40b1-aa53-843b9d05775e/measurements',
+            parameters: [],
+            files: [],
+            server: self::REQUEST_DEFAULT_HEADERS,
+            content: \json_encode(value: $requestBody),
+        );
+
+        self::assertEquals(
+            expected: Response::HTTP_BAD_REQUEST,
+            actual: $this->client->getResponse()->getStatusCode(),
+        );
+    }
 }
