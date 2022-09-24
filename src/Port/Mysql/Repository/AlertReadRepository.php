@@ -30,6 +30,8 @@ final class AlertReadRepository implements AlertReadRepositoryInterface
             ->from(from: 'alerts', alias: 'a')
         ;
 
+        $queryBuilder->addOrderBy(sort: 'a.start_time', order: 'DESC');
+
         if ($query->sensorId) {
             $queryBuilder->andWhere(where: 'a.sensor_id = :sensorId');
             $queryBuilder->setParameter('sensorId', $query->sensorId);
@@ -43,6 +45,21 @@ final class AlertReadRepository implements AlertReadRepositoryInterface
             $queryBuilder->setFirstResult(firstResult: $query->offset);
         }
 
-        return $queryBuilder->executeQuery()->fetchAllAssociative();
+        $alerts = [];
+
+        $i = 0;
+        foreach ($queryBuilder->executeQuery()->fetchAllAssociative() as $alert) {
+            $alerts[$i] = $alert;
+
+            $alerts[$i]['measurements'] = \json_decode(
+                json: $alert['measurements'],
+                associative: true,
+                flags: JSON_THROW_ON_ERROR,
+            );
+
+            ++$i;
+        }
+
+        return $alerts;
     }
 }

@@ -18,7 +18,8 @@ final class AlertReadRepositoryTest extends BaseKernelWithDBTestCase
 
         $alertFactory->createOne(
             data: [
-                '5218eb04-9da6-4dd5-a780-cd50f9378ff6',
+                'sensorId' => '5218eb04-9da6-4dd5-a780-cd50f9378ff6',
+                'measurements' => [1800, 1900, 2000],
             ],
         );
 
@@ -34,6 +35,11 @@ final class AlertReadRepositoryTest extends BaseKernelWithDBTestCase
         self::assertSame(
             expected: '5218eb04-9da6-4dd5-a780-cd50f9378ff6',
             actual: $alerts[0]['sensor_id'],
+        );
+
+        self::assertSame(
+            expected: [1800, 1900, 2000],
+            actual: $alerts[0]['measurements'],
         );
 
         $alerts = $alertReadRepository->findByListAlertsQuery(

@@ -40,9 +40,7 @@ final class CreateAlertCommandTest extends BaseKernelWithDBTestCase
 
         self::assertSame(
             expected: [1800, 1800, 1800],
-            actual: \json_decode(
-                json: $alerts[0]['measurements'],
-            ),
+            actual: $alerts[0]['measurements'],
         );
     }
 }
