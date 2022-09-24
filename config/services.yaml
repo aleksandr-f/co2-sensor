@@ -14,3 +14,7 @@ services:
     App\Application\AlertReadRepositoryInterface:
         alias: App\Port\Mysql\Repository\AlertReadRepository
 
+    App\Port\Api\Rest\QueryParamConverter:
+        tags:
+            - { name: request.param_converter, converter: param_converter.query }
+
