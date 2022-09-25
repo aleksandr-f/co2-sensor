@@ -58,4 +58,21 @@ final class ListAlertsControllerTest extends BaseRestApiTestCase
             ),
         );
     }
+
+    public function testListAlertsLimitError(): void
+    {
+        $this->client->request(
+            method: 'GET',
+            uri: '/api/v1/sensors/137e3b0b-2cc1-40b1-aa53-843b9d05775e/alerts',
+            parameters: [
+                'limit' => 101,
+                'offset' => 1,
+            ],
+        );
+
+        self::assertEquals(
+            expected: Response::HTTP_BAD_REQUEST,
+            actual: $this->client->getResponse()->getStatusCode(),
+        );
+    }
 }

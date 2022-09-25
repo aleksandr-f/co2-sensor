@@ -11,7 +11,7 @@ final class ListAlertsRequest
         public readonly int $offset = 0,
     ) {
         if ($limit > 100) {
-            throw new \InvalidArgumentException(message: 'Limit is too high');
+            throw new \InvalidArgumentException(message: 'Limit should be not more than 100');
         }
     }
 }

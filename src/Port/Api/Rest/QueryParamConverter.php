@@ -7,6 +7,7 @@ namespace App\Port\Api\Rest;
 use JetBrains\PhpStorm\Pure;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer;
@@ -23,11 +24,15 @@ final class QueryParamConverter implements ParamConverterInterface
      */
     public function apply(Request $request, ParamConverter $configuration): bool
     {
-        $object = $this->serializer->denormalize(
-            data: $request->query->all(),
-            type: $configuration->getClass(),
-            context: [AbstractObjectNormalizer::DISABLE_TYPE_ENFORCEMENT => true],
-        );
+        try {
+            $object = $this->serializer->denormalize(
+                data: $request->query->all(),
+                type: $configuration->getClass(),
+                context: [AbstractObjectNormalizer::DISABLE_TYPE_ENFORCEMENT => true],
+            );
+        } catch (\InvalidArgumentException $exception) {
+            throw new BadRequestException(message: $exception->getMessage());
+        }
 
         $request->attributes->set(
             key: $configuration->getName(),
