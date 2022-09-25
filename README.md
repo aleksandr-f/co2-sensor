@@ -24,7 +24,7 @@ Reading flow:
 2. Repository returns data and REST controller transforms them into JSON response
 
 Writing flow:
-1. HTTP request goes to REST Controller, which execute command
+1. HTTP request goes to REST Controller, which executes command
 2. Command Handler [calls Domain method] and write repository. [Application Event is thrown]
 3. Domain model processes domain method call from point 2 [and throws a Domain event]
 4. REST controller returns a response with the status of an operation
