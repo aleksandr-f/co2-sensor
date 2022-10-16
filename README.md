@@ -49,7 +49,7 @@ We have 3 types of the tests here:
 ## Installation
 1. Install [Docker](https://www.docker.com/)
 2. Install [Task](https://taskfile.dev/)
-3. Download source code of the application to local directory
+3. Download source code of the application into local directory
 4. Open a directory in CLI and run `docker-compose up -d`
 5. After all services are started run `task login`. It opens a CLI to PHP container with the application
 6. Run `composer install`
